@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MusicCreator AI Downloader - Tải Nhạc MP3 &amp; WAV</title>
+    <meta name="description" content="Công cụ tải nhạc chất lượng cao MP3 320kbps và WAV Lossless Studio từ Suno AI, OpenMusic.ai, MusicCreator.ai và FreeMusic.ai. Hỗ trợ trích xuất luồng âm thanh nguyên bản, waveform player, Remaster auto-leveler và đo nhịp BPM/Tone chuẩn." />
+    <meta property="og:title" content="MusicCreator AI Downloader - Tải Nhạc MP3 &amp; WAV" />
+    <meta property="og:description" content="Công cụ tải nhạc chất lượng cao MP3 320kbps và WAV Lossless Studio từ Suno AI, OpenMusic.ai, MusicCreator.ai và FreeMusic.ai. Hỗ trợ trích xuất luồng âm thanh nguyên bản, waveform player, Remaster auto-leveler và đo nhịp BPM/Tone chuẩn." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script>
+      // Compatibility shim for browser extensions/testing harnesses that assign window.fetch
+      (function() {
+        try {
+          var origFetch = typeof window !== 'undefined' ? window.fetch : null;
+          var currentFetch = origFetch ? origFetch.bind(window) : origFetch;
+          var desc = {
+            get: function() {
+              return currentFetch;
+            },
+            set: function(v) {
+              currentFetch = v;
+            },
+            configurable: true,
+            enumerable: true
+          };
+
+          try {
+            Object.defineProperty(window, 'fetch', desc);
+          } catch (_) {}
+
+          if (typeof Window !== 'undefined' && Window.prototype) {
+            try {
+              Object.defineProperty(Window.prototype, 'fetch', desc);
+            } catch (_) {}
+          }
+        } catch (_) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

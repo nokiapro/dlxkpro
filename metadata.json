@@ -1,0 +1,8 @@
+{
+  "name": "TẢI NHẠC ĐỈNH CAO",
+  "description": "Công cụ tải nhạc chất lượng cao MP3 320kbps và WAV Lossless Studio từ Suno AI, OpenMusic.ai, MusicCreator.ai và FreeMusic.ai.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
