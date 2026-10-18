@@ -23,10 +23,16 @@ interface SampleLink {
 
 const QUICK_SAMPLES: SampleLink[] = [
   {
-    label: 'Love is Gone',
-    platform: 'MusicCreator',
-    color: 'border-sky-800/60 bg-sky-950/60 text-sky-300 hover:bg-sky-900/60',
-    url: 'https://musiccreator.ai/track/love-is-gone-acoustic-cover',
+    label: 'Cyberpunk Anthem',
+    platform: 'Suno AI',
+    color: 'border-purple-800/60 bg-purple-950/60 text-purple-300 hover:bg-purple-900/60',
+    url: 'https://suno.com/song/84b496ee-3d02-4aed-a757-ec1de0c4f71e',
+  },
+  {
+    label: 'Groove Funk Beat',
+    platform: 'Suno AI',
+    color: 'border-indigo-800/60 bg-indigo-950/60 text-indigo-300 hover:bg-indigo-900/60',
+    url: 'https://suno.com/song/04250c89-056c-4851-929c-d39b16919471',
   },
   {
     label: 'Festival EDM',
@@ -35,16 +41,16 @@ const QUICK_SAMPLES: SampleLink[] = [
     url: 'https://openmusic.ai/track/festival-dance-pop-anthem',
   },
   {
-    label: 'Cyberpunk Beat',
-    platform: 'Suno AI',
-    color: 'border-purple-800/60 bg-purple-950/60 text-purple-300 hover:bg-purple-900/60',
-    url: 'https://suno.com/song/84b496ee-3d02-4aed-a757-ec1de0c4f71e',
+    label: 'Progressive House',
+    platform: 'MusicCreator',
+    color: 'border-sky-800/60 bg-sky-950/60 text-sky-300 hover:bg-sky-900/60',
+    url: 'https://musiccreator.ai/track/high-energy-progressive-house-anthem',
   },
   {
-    label: 'Morning Cafe',
+    label: 'Wedding Acoustic',
     platform: 'FreeMusic',
     color: 'border-emerald-800/60 bg-emerald-950/60 text-emerald-300 hover:bg-emerald-900/60',
-    url: 'https://freemusic.ai/track/morning-cafe-acoustic-chill',
+    url: 'https://freemusic.ai/track/wedding-celebration-acoustic-folk',
   },
 ];
 
@@ -61,7 +67,7 @@ export default function App() {
 
   // Auto-load default track on initial mount so player is instantly visible and interactive
   useEffect(() => {
-    extractTrack('https://musiccreator.ai/track/love-is-gone-acoustic-cover');
+    extractTrack(QUICK_SAMPLES[0].url);
   }, []);
 
   const extractTrack = async (urlToFetch: string) => {

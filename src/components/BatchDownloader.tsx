@@ -33,8 +33,8 @@ export const BatchDownloader: React.FC<BatchDownloaderProps> = ({ onSelectTrack 
     'https://openmusic.ai/track/festival-dance-pop-anthem',
     'https://suno.com/song/04250c89-056c-4851-929c-d39b16919471',
     'https://openmusic.ai/track/nightcity-synthwave-cruise',
-    'https://musiccreator.ai/track/love-is-gone-acoustic-cover',
-    'https://freemusic.ai/track/wedding-acoustic-indie',
+    'https://cdn-images.musiccreator.ai/musiccreator/showcases/1765849965777-yof4in-f17aad9500db67fa.mp3',
+    'https://cdn-media.freemusic.ai/freemusic/static/acoustic-music-generator/samples/wedding-95b3c55925f8b87d4402ad9ad6cc45b6e62f752acf56bf5e0ba07b53b0ba9cd4.mp3',
     'https://suno.com/song/6af8b60a-1fa6-47cc-9678-05b449a03913',
   ];
 
