@@ -81,9 +81,20 @@ export default function App() {
         body: JSON.stringify({ url: trimmed }),
       });
 
-      const data = await res.json();
+      const text = await res.text();
+      let data: any;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        throw new Error(
+          res.ok
+            ? 'Phản hồi từ máy chủ không đúng định dạng JSON.'
+            : `Lỗi máy chủ (${res.status}): ${text.slice(0, 150) || 'Không thể kết nối đến API backend.'}`
+        );
+      }
+
       if (!res.ok) {
-        throw new Error(data.error || 'Không thể trích xuất bài hát từ URL này.');
+        throw new Error(data?.error || 'Không thể trích xuất bài hát từ URL này.');
       }
 
       setCurrentTrack(data);

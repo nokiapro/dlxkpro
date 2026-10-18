@@ -6,7 +6,6 @@ import crypto from 'crypto';
 import { fileURLToPath } from 'url';
 import { Readable } from 'stream';
 import { spawn } from 'child_process';
-import { createServer as createViteServer } from 'vite';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -987,7 +986,7 @@ async function extractOpenMusicTrack(rawUrl: string): Promise<TrackMetadata | nu
 }
 
 // Parser endpoint for MusicCreator.ai, FreeMusic.ai, Suno.com, and OpenMusic.ai
-app.post('/api/extract', async (req, res) => {
+app.post(['/api/extract', '/extract'], async (req, res) => {
   try {
     const { url } = req.body;
     if (!url || typeof url !== 'string') {
@@ -1405,7 +1404,7 @@ function makeContentDisposition(rawFilename: string, ext?: string): string {
 }
 
 // Audio proxy endpoint: guarantees smooth streaming, byte-range seeking, and file downloads
-app.get('/api/proxy-audio', async (req, res) => {
+app.get(['/api/proxy-audio', '/proxy-audio'], async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Range, Content-Type, Accept');
   res.setHeader('Access-Control-Expose-Headers', 'Content-Range, Content-Length, Accept-Ranges');
@@ -1874,6 +1873,7 @@ async function startServer() {
   const isProd = process.env.NODE_ENV === 'production';
 
   if (!isProd) {
+    const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
       server: {
         middlewareMode: true,

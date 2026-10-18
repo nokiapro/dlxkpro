@@ -67,8 +67,13 @@ export const BatchDownloader: React.FC<BatchDownloaderProps> = ({ onSelectTrack 
           body: JSON.stringify({ url }),
         });
         if (res.ok) {
-          const data = await res.json();
-          results.push(data);
+          const text = await res.text();
+          try {
+            const data = JSON.parse(text);
+            if (data && data.audioUrl) {
+              results.push(data);
+            }
+          } catch {}
         }
       } catch (e) {
         console.error('Batch extract failed for', url, e);

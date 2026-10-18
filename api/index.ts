@@ -1,3 +1,3 @@
-import app from '../server.ts';
-
-export default app;
+export default function handler(req: any, res: any) {
+  return res.status(200).json({ status: 'ok', service: 'MusicCreator AI API' });
+}
