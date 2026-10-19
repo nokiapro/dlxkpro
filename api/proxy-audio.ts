@@ -46,7 +46,12 @@ export default async function handler(req: any, res: any) {
     }
 
     res.status(audioResp.status);
-    res.setHeader('Content-Type', audioResp.headers.get('content-type') || 'audio/mpeg');
+
+    let contentType = audioResp.headers.get('content-type') || 'audio/mpeg';
+    if (contentType.startsWith('video/') || contentType.includes('mp4') || cleanUrl.endsWith('.mp4')) {
+      contentType = 'audio/mp4';
+    }
+    res.setHeader('Content-Type', contentType);
     res.setHeader('Accept-Ranges', 'bytes');
 
     const contentLength = audioResp.headers.get('content-length');

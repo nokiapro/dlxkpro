@@ -453,15 +453,15 @@ export const WaveformPlayer: React.FC<WaveformPlayerProps> = ({
     const handleError = () => {
       const currentSrc = audio.src || '';
       console.warn('Audio stream playback notice:', currentSrc, audio.error?.message || '');
-      if (!retryWithFallback && !currentSrc.includes('fallback=1')) {
-        setRetryWithFallback(true);
-        audio.src = fallbackProxy;
+      // Try direct original audioUrl if proxy had an issue, but never switch to an unrelated song
+      if (audioUrl.startsWith('http') && currentSrc !== audioUrl && !currentSrc.endsWith(audioUrl)) {
+        audio.src = audioUrl;
         audio.load();
         return;
       }
       setIsLoadingAudio(false);
       setIsPlaying(false);
-      setAudioError('Không thể phát luồng âm thanh này. Bạn có thể nhấn "Thử lại" hoặc dùng luồng dự phòng.');
+      setAudioError('Không thể nạp luồng phát của bài hát này. Vui lòng kiểm tra lại đường link.');
     };
 
     audio.addEventListener('loadedmetadata', handleLoadedMetadata);

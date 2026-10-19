@@ -276,8 +276,15 @@ export async function extractSunoTrack(rawUrl: string): Promise<TrackMetadata | 
     });
     clearTimeout(timer);
 
+    if (pageRes.status === 404) {
+      throw new Error(`Bài hát này không tìm thấy trên Suno (có thể link bị sai hoặc bài hát đã bị xóa).`);
+    }
+
     if (pageRes.ok) {
       const html = await pageRes.text();
+      if (html.includes('NEXT_HTTP_ERROR_FALLBACK;404')) {
+        throw new Error(`Bài hát này không tìm thấy trên Suno (có thể link bị sai hoặc bài hát đã bị xóa).`);
+      }
 
       // Suno RSC / React state extraction
       const ogTitleMatch =
@@ -744,10 +751,16 @@ export async function extractTrackMetadata(url: string): Promise<TrackMetadata> 
     scrapedCover = 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80';
   }
 
-  // If no direct embedded audio stream was exposed by the web page (common on YouTube/Spotify/TikTok DRM),
-  // load a high-fidelity studio reference stream so the player, waveform, visualizer, and WAV download work 100% smoothly
+  // If no direct embedded audio stream was found on this web page:
   if (!scrapedAudio) {
-    scrapedAudio = VERIFIED_AUDIO_POOLS.musiccreator[0];
+    if (['youtube', 'spotify', 'soundcloud', 'tiktok', 'zingmp3'].includes(platformInfo.source)) {
+      throw new Error(
+        `Liên kết từ ${platformInfo.name} ("${scrapedTitle}") có cơ chế bảo vệ bản quyền DRM và không hỗ trợ luồng tải trực tiếp. Hệ thống chuyên hỗ trợ tải nhạc chuẩn Studio MP3 320k & WAV Lossless từ Suno AI, OpenMusic.ai, MusicCreator.ai, FreeMusic.ai hoặc link file MP3/WAV/M4A trực tiếp.`
+      );
+    }
+    throw new Error(
+      `Không tìm thấy luồng âm thanh nào từ liên kết web này ("${scrapedTitle}"). Vui lòng dán link bài hát từ Suno AI, OpenMusic.ai, MusicCreator.ai, FreeMusic.ai hoặc link file nhạc trực tiếp (.mp3, .wav, .m4a).`
+    );
   }
 
   return {

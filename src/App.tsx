@@ -232,6 +232,18 @@ export default function App() {
             </div>
           </form>
 
+          {/* Supported Platforms Notice */}
+          <div className="flex flex-wrap items-center justify-between gap-2 px-1 text-[11px] text-slate-400">
+            <div className="flex flex-wrap items-center gap-1.5">
+              <span className="text-slate-500 font-medium">Hỗ trợ trích xuất luồng gốc:</span>
+              <span className="px-2 py-0.5 rounded-md bg-purple-950/70 border border-purple-800/60 text-purple-300 font-medium">Suno AI</span>
+              <span className="px-2 py-0.5 rounded-md bg-teal-950/70 border border-teal-800/60 text-teal-300 font-medium">OpenMusic.ai</span>
+              <span className="px-2 py-0.5 rounded-md bg-sky-950/70 border border-sky-800/60 text-sky-300 font-medium">MusicCreator.ai</span>
+              <span className="px-2 py-0.5 rounded-md bg-emerald-950/70 border border-emerald-800/60 text-emerald-300 font-medium">FreeMusic.ai</span>
+              <span className="px-2 py-0.5 rounded-md bg-slate-800 border border-slate-700 text-slate-300 font-medium">Direct MP3 / WAV</span>
+            </div>
+          </div>
+
           {/* Quick Demo Chips */}
           <div className="flex flex-wrap items-center gap-2 pt-0.5">
             <span className="text-[11px] text-slate-500 font-medium">Thử nhanh mẫu:</span>

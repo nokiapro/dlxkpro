@@ -1395,24 +1395,9 @@ app.get(['/api/proxy-audio', '/proxy-audio'], async (req, res) => {
       }
     }
 
-    // If still no response, fall back directly to primary verified pool
-    if (!activeResponse) {
-      const emergencyUrl = VERIFIED_AUDIO_POOLS.musiccreator[0];
-      try {
-        activeResponse = await fetch(emergencyUrl, { headers: fetchHeaders });
-      } catch {}
-    }
-
-    if (!activeResponse || (!activeResponse.ok && activeResponse.status !== 206)) {
-      const emergencyFinal = VERIFIED_AUDIO_POOLS.musiccreator[0];
-      try {
-        activeResponse = await fetch(emergencyFinal);
-      } catch {}
-    }
-
-    if (!activeResponse || !activeResponse.body) {
+    if (!activeResponse || (!activeResponse.ok && activeResponse.status !== 206) || !activeResponse.body) {
       if (!res.headersSent) {
-        res.status(200).setHeader('Content-Type', 'audio/mpeg').end();
+        return res.status(404).json({ error: 'Không thể phát luồng âm thanh từ liên kết này. Vui lòng kiểm tra lại liên kết bài hát.' });
       }
       return;
     }
